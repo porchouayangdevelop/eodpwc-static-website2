@@ -4,18 +4,16 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
 
+  future: {
+    compatibilityVersion: 4,
+  },
+
   imports: {
     autoImport: true,
   },
 
-  app: {
-    head: {
-      title: "EODPWC Static Website",
-      charset: "utf-8",
-      viewport: "width=device-width, initial-scale=1",
-
-      link: [],
-    },
+  routeRules: {
+    "/": { prerender: true },
   },
 
   runtimeConfig: {
@@ -34,6 +32,9 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "nuxt-lucide-icons",
     "@nuxt/icon",
+    "@nuxt/image",
+    "@nuxt/scripts",
+    "@nuxt/test-utils",
   ],
 
   lucide: {
@@ -47,21 +48,12 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    optimizeDeps: {
-      include: [],
+    build: {
+      minify: false,
     },
-    // ssr: {
-    //   noExternal: [],
-    // },
   },
   nitro: {
     preset: "node-server",
-    // experimental: {
-    //   wasm: true,
-    // },
-
-    devServer: {
-      watch: ["~/types/**/*.ts"],
-    },
+    minify: false,
   },
 });
